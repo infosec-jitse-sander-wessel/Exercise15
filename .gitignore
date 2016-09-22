@@ -7,5 +7,4 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
-/exercise15.iml
-.idea/
+/.idea/
