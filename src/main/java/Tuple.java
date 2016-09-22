@@ -11,8 +11,8 @@ public class Tuple<X extends Number, Y extends Number> {
         this.y = y;
     }
 
-//    Tuple<Long, Long> round() {
-//        return new Tuple<Long, Long>(Math.round((double) x), Math.round((double) y));
-//    }
+    public String toString() {
+        return "(" + x + ", " + y + ")";
+    }
 
 }

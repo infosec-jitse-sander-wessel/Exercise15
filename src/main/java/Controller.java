@@ -5,8 +5,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.lang.Math.pow;
-
 /**
  * Created by Sander on 21-9-2016.
  */
@@ -37,7 +35,7 @@ public class Controller {
         System.out.println("Usage: <multiplier> <x> <y>");
     }
 
-    public void run() throws ParseException {
+    public void run() throws Exception {
         if (commandLine.hasOption("h")) {
             printHelpPage();
             return;
@@ -51,7 +49,32 @@ public class Controller {
 //            throw new ParseException("Invalid number of integer arguments.");
 //        }
 
-        new EllipticCurve(10, 21, 41).multiply(new Tuple<>(3, 6), 1);
 
+        int aM = 15;
+        int bM = 22;
+
+        int a = 11;
+        int b = 19;
+        int mod = 167;
+
+        EllipticCurve curve = new EllipticCurve(a, b, mod);
+        Tuple<Double, Double> p1 = new Tuple<>(2.0, 7.0);
+
+        Tuple<Double, Double> aliceResult = curve.multiply(p1, aM);
+        System.out.println(aliceResult + "\n");
+
+        Tuple<Double, Double> bobResult = curve.multiply(p1, bM);
+        System.out.println(bobResult + "\n");
+
+
+//        Tuple<Double, Double> aliceBobResult = curve.multiply(aliceResult, bM);
+//        Tuple<Double, Double> bobAliceResult = curve.multiply(bobResult, aM);
+
+//        System.out.println(aliceBobResult);
+//        System.out.println(bobAliceResult);
+    }
+
+    private Tuple<Long, Long> round(Tuple<Double, Double> input) {
+        return new Tuple<>(Math.round(input.x), Math.round(input.y));
     }
 }
