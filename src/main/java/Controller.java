@@ -58,23 +58,19 @@ public class Controller {
         int mod = 167;
 
         EllipticCurve curve = new EllipticCurve(a, b, mod);
-        Tuple<Double, Double> p1 = new Tuple<>(2.0, 7.0);
+        Tuple<Integer, Integer> p1 = new Tuple<>(2, 7);
 
-        Tuple<Double, Double> aliceResult = curve.multiply(p1, aM);
+        Tuple<Integer, Integer> aliceResult = curve.multiply(p1, aM);
         System.out.println(aliceResult + "\n");
 
-        Tuple<Double, Double> bobResult = curve.multiply(p1, bM);
+        Tuple<Integer, Integer> bobResult = curve.multiply(p1, bM);
         System.out.println(bobResult + "\n");
 
 
-//        Tuple<Double, Double> aliceBobResult = curve.multiply(aliceResult, bM);
-//        Tuple<Double, Double> bobAliceResult = curve.multiply(bobResult, aM);
+        Tuple<Integer, Integer> aliceBobResult = curve.multiply(aliceResult, bM);
+        Tuple<Integer, Integer> bobAliceResult = curve.multiply(bobResult, aM);
 
-//        System.out.println(aliceBobResult);
-//        System.out.println(bobAliceResult);
-    }
-
-    private Tuple<Long, Long> round(Tuple<Double, Double> input) {
-        return new Tuple<>(Math.round(input.x), Math.round(input.y));
+        System.out.println(aliceBobResult);
+        System.out.println(bobAliceResult);
     }
 }
