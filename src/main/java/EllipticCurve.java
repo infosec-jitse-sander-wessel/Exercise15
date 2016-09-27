@@ -22,11 +22,11 @@ public class EllipticCurve {
     public Tuple<Integer, Integer> multiply(Tuple<Integer, Integer> p, int multiplier) throws Exception {
         int additionCounter = 0;
         List<Boolean> binary = getIntegerBinaryBooleans(multiplier);
-
+        System.out.println(binary.size());
         List<Tuple<Integer, Integer>> tuples = new ArrayList<>();
         tuples.add(p);
         for (int i = 1; i < binary.size(); i++) {
-            tuples.add(intPoint(tuples.get(i - 1)));
+            tuples.add(doublePoint(tuples.get(i - 1)));
         }
 
         List<Tuple<Integer, Integer>> toAdd = new ArrayList<>();
@@ -36,10 +36,17 @@ public class EllipticCurve {
             }
         }
 
-        Tuple<Integer, Integer> result = toAdd.stream()
-                .reduce(this::addPoints)
-                .orElseThrow(() -> new Exception("Shit happened"));
-        return result;
+        while (toAdd.size() > 1) {
+            toAdd.add(addPoints(toAdd.remove(0), toAdd.remove(0)));
+            additionCounter++;
+        }
+
+        System.out.println("Additions done: " + additionCounter);
+
+//        Tuple<Integer, Integer> result = toAdd.stream()
+//                .reduce(this::addPoints)
+//                .orElseThrow(() -> new Exception("Shit happened"));
+        return toAdd.get(0);
     }
 
     private int getSamePointM(Tuple<Integer, Integer> p) {
@@ -62,7 +69,7 @@ public class EllipticCurve {
         return mod(((m * (p1.x - x3)) - p1.y), mod);
     }
 
-    private Tuple<Integer, Integer> intPoint(Tuple<Integer, Integer> p) {
+    private Tuple<Integer, Integer> doublePoint(Tuple<Integer, Integer> p) {
         int m = getSamePointM(p);
         int x3 = x3(p, p, m);
         int y3 = y3(p, m, x3);

@@ -1,6 +1,7 @@
 import org.apache.commons.cli.*;
 import org.apache.commons.lang3.StringUtils;
 
+import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -49,28 +50,27 @@ public class Controller {
 //            throw new ParseException("Invalid number of integer arguments.");
 //        }
 
+        int aM = 42;
+        int bM = 57;
 
-        int aM = 15;
-        int bM = 22;
-
-        int a = 11;
-        int b = 19;
-        int mod = 167;
+        int a = -4;
+        int b = 25;
+        int mod = 29;
 
         EllipticCurve curve = new EllipticCurve(a, b, mod);
-        Tuple<Integer, Integer> p1 = new Tuple<>(2, 7);
+        Tuple<Integer, Integer> p1 = new Tuple<>(23, 23);
 
         Tuple<Integer, Integer> aliceResult = curve.multiply(p1, aM);
-        System.out.println(aliceResult + "\n");
-
-        Tuple<Integer, Integer> bobResult = curve.multiply(p1, bM);
-        System.out.println(bobResult + "\n");
-
-
-        Tuple<Integer, Integer> aliceBobResult = curve.multiply(aliceResult, bM);
-        Tuple<Integer, Integer> bobAliceResult = curve.multiply(bobResult, aM);
-
-        System.out.println(aliceBobResult);
-        System.out.println(bobAliceResult);
+        System.out.println("Alice: " + aliceResult + "\n");
+//
+//        Tuple<Integer, Integer> bobResult = curve.multiply(p1, bM);
+//        System.out.println("Bob: " + bobResult + "\n");
+//
+//
+//        Tuple<Integer, Integer> aliceBobResult = curve.multiply(aliceResult, bM);
+//        Tuple<Integer, Integer> bobAliceResult = curve.multiply(bobResult, aM);
+//
+//        System.out.println(aliceBobResult);
+//        System.out.println(bobAliceResult);
     }
 }
